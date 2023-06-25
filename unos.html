@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Projekt Pwa</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="hedic">
+            <nav class="navbar">
+                <img src="images/Screenshot 2023-06-18 210642.png" class="slika" alt="">
+                <ul>
+                    <li class="prvili"><a href="index.php">HOME</a></li>
+                    <li><a href="unos.html">UNOS VIJESTI</a></li>
+                    <li><a href="kategorija.php?kategorija=sport">SPORT</a></li>
+                    <li><a href="kategorija.php?kategorija=kultura">KULTURA</a></li>
+                    <li><a href="index.php">NEWS</a></li>
+                    <li><a href="administrator.php">ADMINISTRATOR</a></li>
+                </ul>
+
+            </nav>
+        </header>
+        <div class="glavnidio">
+            <form action="skripta.php" method="post" onsubmit="return validateForm()">
+                <label for="autor">Ime Autora</label><br>
+                <input type="text" id="autor" name="autor"><br>
+
+                <label for="datum">Unesite datum</label><br>
+                <input type="date" name="datum" id="datum"><br>
+
+                <label for="naslov">Naslov vijesti:</label><br>
+                <input type="text" id="naslov" name="naslov" required><br><br>
+
+                <label for="kratki_sadrzaj">Kratki sadržaj vijesti (do 50 znakova):</label><br>
+                <textarea id="kratki_sadrzaj" name="kratki_sadrzaj" cols="50" rows="10" maxlength="50"
+                    required></textarea><br><br>
+
+                <label for="sadrzaj">Sadržaj vijesti:</label><br>
+                <textarea id="sadrzaj" name="sadrzaj" cols="70" rows="20" required></textarea><br><br>
+
+                <label for="slika">Slika:</label><br>
+                <input type="file" id="slika" name="slika"><br><br>
+
+                <label for="kategorija">Odaberi kategoriju:</label><br>
+                <select name="kategorija" id="kategorija" name="Odaberi">
+                    <option disabled selected value> -- odaberi opciju -- </option>
+                    <option value="SPORT">SPORT</option>
+                    <option value="KULTURA">KULTURA</option>
+                </select>  <br>
+
+                <label for="arhiva">Arhiva:</label><br>
+                <input type="checkbox" id="arhiva" name="arhiva" ><br><br>
+
+                <input type="submit" name="spremi" value="Spremi">
+                <input type="reset" value="Resetiraj">
+
+            </form>
+        </div>
+        <footer class="fotic">
+            <p>Copyright 2019 Morgenpost verlag GmBH</p>
+        </footer>
+    </div>
+
+    <script>
+        function validateForm() {
+          
+          var naslov = document.getElementById("naslov").value;
+          var kratkiSadrzaj = document.getElementById("kratki_sadrzaj").value;
+          var sadrzaj = document.getElementById("sadrzaj").value;
+          var slika = document.getElementById("slika").value;
+          var kategorija = document.getElementById("kategorija").value;
+      
+          
+          var isValid = true;
+      
+          
+          if (naslov.length < 5 || naslov.length > 30) {
+            document.getElementById("naslov").style.borderColor = "red";
+            isValid = false;
+          }
+      
+          
+          if (kratkiSadrzaj.length < 10 || kratkiSadrzaj.length > 100) {
+            document.getElementById("kratki_sadrzaj").style.borderColor = "red";
+            isValid = false;
+          }
+      
+         
+          if (sadrzaj.trim() === "") {
+            document.getElementById("sadrzaj").style.borderColor = "red";
+            isValid = false;
+          }
+      
+         
+          if (slika === "") {
+            document.getElementById("slika").style.borderColor = "red";
+            isValid = false;
+          }
+      
+          
+          if (kategorija === "") {
+            document.getElementById("kategorija").style.borderColor = "red";
+            isValid = false;
+          }
+      
+         
+          if (!isValid) {
+            var errorMessage = "Molimo ispravno popunite sljedeća polja:\n";
+            if (naslov.length < 5 || naslov.length > 30) {
+              errorMessage += "- Naslov vijesti (5-30 znakova)\n";
+            }
+            if (kratkiSadrzaj.length < 10 || kratkiSadrzaj.length > 100) {
+              errorMessage += "- Kratki sadržaj vijesti (10-100 znakova)\n";
+            }
+            if (sadrzaj.trim() === "") {
+              errorMessage += "- Tekst vijesti\n";
+            }
+            if (slika === "") {
+              errorMessage += "- Slika\n";
+            }
+            if (kategorija === "") {
+              errorMessage += "- Kategorija\n";
+            }
+            alert(errorMessage);
+          }
+      
+          return isValid;
+        }
+      </script>
+</body>
+
+</html>
